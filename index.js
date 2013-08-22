@@ -112,4 +112,13 @@ var MediaPlayer = function(options) {
   return this;
 };
 
-module.exports = exports = MediaPlayer;
+MediaPlayer.instance = null;
+MediaPlayer.getInstance = function(){
+    if (this.instance === null) {
+        this.instance = new MediaPlayer();
+    }
+
+    return this.instance;
+}
+
+module.exports = exports = MediaPlayer.getInstance();
