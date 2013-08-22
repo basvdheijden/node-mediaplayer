@@ -30,7 +30,7 @@ var MediaPlayer = function(options) {
 
   this.start = function(resource) {
     if (this.process) {
-      return this;
+      return this.stop().start(resource);
     }
 
     this.resource = resource;
@@ -55,9 +55,11 @@ var MediaPlayer = function(options) {
   };
 
   this.reset = function() {
-    debug('method: reset.');
-    this.process = null;
-    this.resource = null;
+    if (this.process) {
+      debug('method: reset.');
+      this.process = null;
+      this.resource = null;  
+    }
 
     return this;
   };
