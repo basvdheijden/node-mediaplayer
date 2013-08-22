@@ -1,0 +1,27 @@
+{
+  "name": "node-mediaplayer",
+  "version": "0.0.0",
+  "description": "Abstraction layer for cli based mediaplayers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@mieris.com:projects/node-omxplayer"
+  },
+  "keywords": [
+    "omxplayer",
+    "mediaplayer"
+  ],
+  "author": "Bas van der Heijden",
+  "license": "BSD",
+  "dependencies": {
+    "debug": "~0.7.2"
+  },
+  "devDependencies": {
+    "jshint": "~2.1.10",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.3"
+  }
+}
