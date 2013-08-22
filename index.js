@@ -58,7 +58,7 @@ var MediaPlayer = function(options) {
     if (this.process) {
       debug('method: reset.');
       this.process = null;
-      this.resource = null;  
+      this.resource = null;
     }
 
     return this;
@@ -116,11 +116,11 @@ var MediaPlayer = function(options) {
 
 MediaPlayer.instance = null;
 MediaPlayer.getInstance = function(){
-    if (this.instance === null) {
-        this.instance = new MediaPlayer();
-    }
+  if (this.instance === null) {
+    this.instance = new MediaPlayer();
+  }
 
-    return this.instance;
-}
+  return this.instance;
+};
 
 module.exports = exports = MediaPlayer.getInstance();
