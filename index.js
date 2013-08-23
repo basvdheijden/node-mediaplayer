@@ -23,6 +23,9 @@ var MediaPlayer = function(options) {
     stop: 'q'
   };
 
+  this.fifo = options.fifo || './media.stream';
+  this.fifoEnabled = true;
+
   // The child_process isntance of the player.
   this.process = null;
   // The current resource that is playing
@@ -33,19 +36,20 @@ var MediaPlayer = function(options) {
       return this.stop().start(resource);
     }
 
+    debug('method: start.');
+
     this.resource = resource;
 
     // If we're dealing with a resource over the internet,
     // Create a fifo.
-    if (resource.match(/^http/)) {
-      var fifo = './media.stream';
-      var cmd = 'rm -rf ' + fifo + ' && mkfifo ' + fifo + ' && wget -q -O ' + fifo + ' "' + resource + '" &';
-      this.resource = fifo;
+    if (this.fifoEnabled && resource.match(/^http/)) {
+      var cmd = 'rm -rf ' + this.fifo + ' && mkfifo ' + this.fifo + ' && wget -q -O ' + this.fifo + ' "' + resource + '" &';
+      this.resource = this.fifo;
+      debug('starting http with: ' + cmd);
       child_process.exec(cmd);
     }
 
-    debug('method: start.');
-    debug('Starting resource: ' + this.resource);
+    debug('Starting resource: ' + this.player + ' ' + this.resource);
     this.process = child_process.exec(this.player + ' ' + this.resource);
 
     this.process.on('error', self.reset);
@@ -57,6 +61,7 @@ var MediaPlayer = function(options) {
   this.reset = function() {
     if (this.process) {
       debug('method: reset.');
+      this.process.kill();
       this.process = null;
       this.resource = null;
     }
