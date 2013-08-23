@@ -1,7 +1,9 @@
-var mediaPlayer;
+var MediaPlayer = require('../index');
 
 var play = function(test, path, t) {
 	test.expect(3);
+
+	var mediaPlayer = MediaPlayer.getInstance();
 	test.ok(mediaPlayer, 'mediaPlayer instance must exist');
 
 	mediaPlayer.start(path);
@@ -19,9 +21,9 @@ var play = function(test, path, t) {
 
 module.exports = {
   setUp: function(callback) {
-  	mediaPlayer = require('../index');
-  	mediaPlayer.player = 'mplayer';
-  	mediaPlayer.fifo = false;
+  	var m = MediaPlayer.getInstance();
+  	m.player = 'mplayer';
+  	m.fifo = false;
 
     callback();
   },
