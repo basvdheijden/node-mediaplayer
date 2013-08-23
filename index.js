@@ -24,7 +24,6 @@ var MediaPlayer = function(options) {
   };
 
   this.fifo = options.fifo || './media.stream';
-  this.fifoEnabled = true;
 
   // The child_process isntance of the player.
   this.process = null;
@@ -42,7 +41,7 @@ var MediaPlayer = function(options) {
 
     // If we're dealing with a resource over the internet,
     // Create a fifo.
-    if (this.fifoEnabled && resource.match(/^http/)) {
+    if (this.fifo && resource.match(/^http/)) {
       var cmd = 'rm -rf ' + this.fifo + ' && mkfifo ' + this.fifo + ' && wget -q -O ' + this.fifo + ' "' + resource + '" &';
       this.resource = this.fifo;
       debug('starting http with: ' + cmd);

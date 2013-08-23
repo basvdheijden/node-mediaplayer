@@ -21,7 +21,7 @@ module.exports = {
   setUp: function(callback) {
   	mediaPlayer = require('../index');
   	mediaPlayer.player = 'mplayer';
-  	mediaPlayer.fifoEnabled = false;
+  	mediaPlayer.fifo = false;
 
     callback();
   },
