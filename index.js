@@ -119,12 +119,12 @@ var MediaPlayer = function(options) {
 };
 
 MediaPlayer.instance = null;
-MediaPlayer.getInstance = function(){
+MediaPlayer.getInstance = function(options){
   if (this.instance === null) {
-    this.instance = new MediaPlayer();
+    this.instance = new MediaPlayer(options);
   }
 
   return this.instance;
 };
 
-module.exports = exports = MediaPlayer.getInstance();
+module.exports = exports = MediaPlayer;
