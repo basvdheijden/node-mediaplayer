@@ -23,7 +23,7 @@ var MediaPlayer = function(options) {
     stop: 'q'
   };
 
-  this.fifo = options.fifo || './media.stream';
+  this.fifo = (typeof options.fifo !== 'undefined') ? options.fifo : './media.stream';
 
   // The child_process isntance of the player.
   this.process = null;
