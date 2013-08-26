@@ -30,7 +30,7 @@ var MediaPlayer = function(options) {
   // The current resource that is playing
   this.resource = null;
 
-  this.start = function(resource) {
+  this.start = function(resource, title) {
     if (this.process) {
       return this.stop().start(resource);
     }
@@ -53,6 +53,11 @@ var MediaPlayer = function(options) {
 
     this.process.on('error', self.reset);
     this.process.on('exit', self.reset);
+
+    // If a human readable title was given, use that as resource instead.
+    if (title) {
+      this.resource = title;
+    }
 
     return this;
   };
