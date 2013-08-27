@@ -52,7 +52,10 @@ var MediaPlayer = function(options) {
     this.process = child_process.exec(this.player + ' ' + this.resource);
 
     this.process.on('error', self.reset);
-    this.process.on('exit', self.reset);
+    this.process.on('exit', function() {
+      debug('Ending player by its own.');
+      self.reset();
+    });
 
     // If a human readable title was given, use that as resource instead.
     if (title) {
@@ -63,13 +66,13 @@ var MediaPlayer = function(options) {
   };
 
   this.reset = function() {
+    debug('method: reset.');
     if (this.process) {
-      debug('method: reset.');
       this.process.kill();
       this.process = null;
-      this.resource = null;
     }
 
+    this.resource = null;
     return this;
   };
 

@@ -38,5 +38,23 @@ module.exports = {
 
   playHTTP: function(test) {
   	play(test, 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4', 5000);
+  },
+
+  playTwice: function(test) {
+    test.expect(3);
+
+    var mediaPlayer = MediaPlayer.getInstance();
+    mediaPlayer.start(__dirname + '/sample.mp4');
+    setTimeout(function() {
+      test.ok(!mediaPlayer.process, 'The process should\'ve been stopped by now.');
+      test.ok(!mediaPlayer.resource, 'The resource should be empty by now.');
+
+      mediaPlayer.start(__dirname + '/sample.mp4');
+
+      setTimeout(function() {
+        test.ok(mediaPlayer.process, 'Mediaplayer should play a second file sequentially.');
+        test.done();
+      }, 1000);
+    }, 10000);
   }
 };
