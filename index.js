@@ -58,7 +58,7 @@ var MediaPlayer = function(options) {
     }
 
     debug('Starting resource: ' + this.player + ' ' + this.resource);
-    this.process = child_process.exec(this.player + ' ' + this.resource);
+    this.process = child_process.exec(this.player + ' "' + this.resource + '"');
 
     this.process.on('error', self.reset);
     this.process.on('exit', function() {
