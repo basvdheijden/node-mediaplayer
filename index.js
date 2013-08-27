@@ -18,8 +18,8 @@ var MediaPlayer = function(options) {
     volInc: '=',
     volDec: '-',
     subtitles: 's',
-    forward: '$\'\\x1b\\x5b\\x43\'',
-    back: '$\'\\x1b\\x5b\\x44\'',
+    forward: "$'\x1b\x5b\x41'",
+    backward: "$'\x1b\x5b\x44'",
     stop: 'q'
   };
 
@@ -52,13 +52,13 @@ var MediaPlayer = function(options) {
     // Create a fifo.
     if (this.fifo && resource.match(/^http/)) {
       var cmd = 'rm -rf ' + this.fifo + ' && mkfifo ' + this.fifo + ' && wget -q -O ' + this.fifo + ' "' + resource + '" &';
-      this.resource = this.fifo;
+      this.resource = '"' + this.fifo + '"';
       debug('starting http with: ' + cmd);
       child_process.exec(cmd);
     }
 
     debug('Starting resource: ' + this.player + ' ' + this.resource);
-    this.process = child_process.exec(this.player + ' "' + this.resource + '"');
+    this.process = child_process.exec(this.player + ' ' + this.resource);
 
     this.process.on('error', self.reset);
     this.process.on('exit', function() {
