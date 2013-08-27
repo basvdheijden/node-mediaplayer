@@ -8,7 +8,7 @@ var play = function(test, path, t) {
 
 	mediaPlayer.start(path);
 	setTimeout(function() {
-		test.ok(mediaPlayer.resource = path, 'After 2 secs, mediaPlayer should be playing the mp4 file');
+		test.ok(mediaPlayer.resource === path, 'After 2 secs, mediaPlayer should be playing the mp4 file');
 
 		mediaPlayer.stop();
 		test.ok(!mediaPlayer.process, 'After calling stop, the media file should not be playing anymore.');
@@ -56,5 +56,27 @@ module.exports = {
         test.done();
       }, 1000);
     }, 10000);
+  },
+
+  playInterrupt: function(test) {
+    test.expect(3);
+
+    var path = __dirname + '/sample.mp4';
+    var mediaPlayer = MediaPlayer.getInstance();
+    mediaPlayer.start(path);
+
+    setTimeout(function() {
+      test.ok(mediaPlayer.resource === path, 'After 2 secs, mediaPlayer should be playing the mp4 file');
+
+      mediaPlayer.start(path);
+
+      test.ok(!mediaPlayer.resource, 'The next file should not be playing yet, but the previous one has to be stopped already.');
+
+      setTimeout(function() {
+        test.ok(mediaPlayer.resource === path, 'After 1 sec more, mediaPlayer should be playing the mp4 file');
+        mediaPlayer.stop();
+        test.done();
+      }, 1500);
+    }, 2000);
   }
 };

@@ -25,6 +25,9 @@ var MediaPlayer = function(options) {
 
   this.fifo = (typeof options.fifo !== 'undefined') ? options.fifo : './media.stream';
 
+  // The period of time to let the player cooldown from a stop command.
+  this.coolDown = options.cooldown || 500;
+
   // The child_process isntance of the player.
   this.process = null;
   // The current resource that is playing
@@ -32,7 +35,13 @@ var MediaPlayer = function(options) {
 
   this.start = function(resource, title) {
     if (this.process) {
-      return this.stop().start(resource);
+      this.stop();
+
+      setTimeout(function() {
+        self.start(resource, title);
+      }, self.coolDown);
+
+      return this;
     }
 
     debug('method: start.');
