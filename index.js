@@ -18,8 +18,8 @@ var MediaPlayer = function(options) {
     volInc: '=',
     volDec: '-',
     subtitles: 's',
-    forward: "$'\x1b\x5b\x41'",
-    backward: "$'\x1b\x5b\x44'",
+    forward: "\u001b[C",
+    backward: "\u001b[D",
     stop: 'q'
   };
 

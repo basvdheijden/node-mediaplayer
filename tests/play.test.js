@@ -78,5 +78,21 @@ module.exports = {
         test.done();
       }, 1500);
     }, 2000);
+  },
+
+  playForward: function(test) {
+    test.expect(1);
+
+    var path = __dirname + '/sample.mp4';
+    var mediaPlayer = MediaPlayer.getInstance();
+    mediaPlayer.start(path);
+
+    setTimeout(function() {
+      mediaPlayer.forward();
+      setTimeout(function() {
+        test.ok(!mediaPlayer.resource, 'The resource should be stopped after 1.2secs if forwarded.');
+        test.done();
+      }, 2000);
+    }, 1500);
   }
 };
