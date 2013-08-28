@@ -136,7 +136,7 @@ var MediaPlayer = function(options) {
 
   this.subtitles = function() {
     debug('method: subtitles.');
-    return this.write(this.command.subtitles);
+    return this.write(this.commands.subtitles);
   };
 
   return this;
