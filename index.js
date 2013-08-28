@@ -47,18 +47,25 @@ var MediaPlayer = function(options) {
     debug('method: start.');
 
     this.resource = resource;
+    var localResource;
 
     // If we're dealing with a resource over the internet,
     // Create a fifo.
     if (this.fifo && resource.match(/^http/)) {
       var cmd = 'rm -rf ' + this.fifo + ' && mkfifo ' + this.fifo + ' && wget -q -O ' + this.fifo + ' "' + resource + '" &';
-      this.resource = '"' + this.fifo + '"';
+
+      // Set the resource to the fifo instead of the file requested.
+      this.resource = localResource = this.fifo;
       debug('starting http with: ' + cmd);
       child_process.exec(cmd);
     }
+    else {
+      // We're dealing with a local file: quote the file path.
+      localResource = '"' + this.resource.replace('"', '\\"') + '"';
+    }
 
-    debug('Starting resource: ' + this.player + ' ' + this.resource);
-    this.process = child_process.exec(this.player + ' ' + this.resource);
+    debug('Starting resource: ' + this.player + ' ' + localResource);
+    this.process = child_process.exec(this.player + ' ' + localResource);
 
     this.process.on('error', self.reset);
     this.process.on('exit', function() {
