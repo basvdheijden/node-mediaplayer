@@ -8,7 +8,7 @@ var MediaPlayer = function(options) {
     options = {};
   }
 
-  // The media palyer instance.
+  // The media player instance.
   this.player = options.player || 'omxplayer -o hdmi -r';
   debug('New MediaPlayer instance created. Player command set to ' + this.player);
 
@@ -35,7 +35,7 @@ var MediaPlayer = function(options) {
   // The current resource that is playing
   this.resource = null;
 
-  this.start = function(resource, title) {
+  this.start = function(resource, title, arg) {
     if (this.process) {
       this.stop();
 
@@ -66,8 +66,11 @@ var MediaPlayer = function(options) {
       localResource = '"' + this.resource.replace('"', '\\"') + '"';
     }
 
-    debug('Starting resource: ' + this.player + ' ' + localResource);
-    this.process = child_process.exec(this.player + ' ' + localResource);
+    // If any command line arguments are given, pass them on.
+    var command = [this.player, arg, localResource].join(' ');
+
+    debug('Starting resource: ' + command);
+    this.process = child_process.exec(command);
 
     this.process.on('error', self.reset);
     this.process.on('exit', function() {

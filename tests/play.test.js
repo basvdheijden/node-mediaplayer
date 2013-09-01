@@ -8,6 +8,7 @@ var play = function(test, path, t) {
 
 	mediaPlayer.start(path);
 	setTimeout(function() {
+
 		test.ok(mediaPlayer.resource === path, 'After 2 secs, mediaPlayer should be playing the mp4 file');
 
 		mediaPlayer.stop();
@@ -33,7 +34,7 @@ module.exports = {
   },
 
   playMP4: function(test) {
-    play(test, __dirname + '/sample.mp4', 2000);
+    play(test, __dirname + '/sample.mp4', 3000);
   },
 
   playHTTP: function(test) {

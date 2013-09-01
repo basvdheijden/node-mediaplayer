@@ -22,7 +22,6 @@ module.exports = function(grunt) {
         'boss': true,
         'eqnull': true,
         'node': true,
-        'quotmark': 'single',
         'trailing': true
       }
     },

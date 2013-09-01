@@ -13,9 +13,8 @@ module.exports = {
   mainTest: function(test) {
     test.expect(3);
 
-    var mediaPlayer = MediaPlayer.getInstance({
-      player: 'randomstring'
-    });
+    var mediaPlayer = MediaPlayer.getInstance();
+    mediaPlayer.player = 'randomstring';
 
     test.ok(typeof mediaPlayer === 'object', 'MediaPlayer should exist');
     test.ok(typeof mediaPlayer.start === 'function', 'MediaPlayer should have a start function.');
