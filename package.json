@@ -1,6 +1,6 @@
 {
   "name": "node-mediaplayer",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Abstraction layer for cli based mediaplayers",
   "main": "index.js",
   "scripts": {

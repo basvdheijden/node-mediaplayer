@@ -18,9 +18,11 @@ var MediaPlayer = function(options) {
     volInc: '=',
     volDec: '-',
     subtitles: 's',
+    subtitleNext: 'm',
+    subtitlePrev: 'n',
     forward: "\u001b[C",
     backward: "\u001b[D",
-    stop: 'q'
+    stop: 'q',
   };
 
   this.fifo = (typeof options.fifo !== 'undefined') ? options.fifo : './media.stream';
@@ -137,6 +139,16 @@ var MediaPlayer = function(options) {
   this.subtitles = function() {
     debug('method: subtitles.');
     return this.write(this.commands.subtitles);
+  };
+
+  this.subtitlePrev = function() {
+    debug('method: subtitlePrev');
+    return this.write(this.commands.subtitlePrev);
+  };
+
+  this.subtitleNext = function() {
+    debug('method: subtitleNext');
+    return this.write(this.commands.subtitleNext);
   };
 
   return this;
