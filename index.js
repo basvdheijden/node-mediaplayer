@@ -67,7 +67,12 @@ var MediaPlayer = function(options) {
     }
 
     // If any command line arguments are given, pass them on.
-    var command = [this.player, arg, localResource].join(' ');
+    var components = [this.player];
+    if (arg) {
+      components.push(arg);
+    }
+    components.push(localResource);
+    var command = components.join(' ');
 
     debug('Starting resource: ' + command);
     this.process = child_process.exec(command);
