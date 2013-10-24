@@ -94,7 +94,7 @@ var MediaPlayer = function(options) {
   this.reset = function() {
     debug('method: reset.');
     if (this.process) {
-      this.process.kill();
+      this.process.kill('SIGINT');
       this.process = null;
     }
 
