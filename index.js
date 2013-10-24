@@ -22,13 +22,13 @@ var MediaPlayer = function(options) {
     subtitlePrev: 'n',
     forward: "\u001b[C",
     backward: "\u001b[D",
-    stop: 'q',
+    stop: 'q'
   };
 
   this.fifo = (typeof options.fifo !== 'undefined') ? options.fifo : './media.stream';
 
   // The period of time to let the player cooldown from a stop command.
-  this.coolDown = options.cooldown || 500;
+  this.coolDown = options.cooldown || 100;
 
   // The child_process isntance of the player.
   this.process = null;
@@ -95,6 +95,7 @@ var MediaPlayer = function(options) {
     debug('method: reset.');
     if (this.process) {
       this.process.kill('SIGINT');
+      child_process.exec('killall -9 ' + this.player.split(' ')[0]);
       this.process = null;
     }
 
