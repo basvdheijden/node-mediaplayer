@@ -1,6 +1,6 @@
 {
   "name": "node-mediaplayer",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Abstraction layer for cli based mediaplayers",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@mieris.com:projects/node-omxplayer"
+    "url": "git@git.basvdheijden.com:node/node-omxplayer.git"
   },
   "keywords": [
     "omxplayer",

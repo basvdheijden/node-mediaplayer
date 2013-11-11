@@ -18,8 +18,8 @@ var MediaPlayer = function(options) {
     volInc: '=',
     volDec: '-',
     subtitles: 's',
-    subtitleNext: 'm',
-    subtitlePrev: 'n',
+    subtitleForward: 'f',
+    subtitleBackward: 'd',
     forward: "\u001b[C",
     backward: "\u001b[D",
     stop: 'q'
@@ -150,14 +150,14 @@ var MediaPlayer = function(options) {
     return this.write(this.commands.subtitles);
   };
 
-  this.subtitlePrev = function() {
-    debug('method: subtitlePrev');
-    return this.write(this.commands.subtitlePrev);
+  this.subtitleBackward = function() {
+    debug('method: subtitleBackward');
+    return this.write(this.commands.subtitleBackward);
   };
 
-  this.subtitleNext = function() {
-    debug('method: subtitleNext');
-    return this.write(this.commands.subtitleNext);
+  this.subtitleForward = function() {
+    debug('method: subtitleForward');
+    return this.write(this.commands.subtitleForward);
   };
 
   return this;
